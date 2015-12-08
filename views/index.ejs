@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="http://code.jquery.com/jquery-2.1.4.min.js" type="text/javascript"></script>
+        <script src="https://cdn.auth0.com/js/lock-7.10.3.js"></script>
+
+        <script src="//use.typekit.net/iws6ohy.js"></script>
+        <script>try{Typekit.load();}catch(e){}</script>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- font awesome from BootstrapCDN -->
+        <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+
+        <script src="javascripts/auth0-variables.js"> </script>
+        
+        <link href="stylesheets/app.css" rel="stylesheet">
+        <link href="stylesheets/style.css" rel="stylesheet">
+        
+        <script>
+          window.fbAsyncInit = function() {
+            FB.init({
+              appId      : '917820418299845',
+              xfbml      : true,
+              version    : 'v2.5'
+            });
+          };
+
+          (function(d, s, id){
+             var js, fjs = d.getElementsByTagName(s)[0];
+             if (d.getElementById(id)) {return;}
+             js = d.createElement(s); js.id = id;
+             js.src = "//connect.facebook.net/en_US/sdk.js";
+             fjs.parentNode.insertBefore(js, fjs);
+           }(document, 'script', 'facebook-jssdk'));
+        </script>
+        <script src="javascripts/front.js"> </script>
+    </head>
+    <body class="home">
+        <% for(var i=0; i<title.name.length; i++) {%>
+         <li><%= title.name[i] %></li>
+        <% } %>
+        <div class="container">
+            <div class="login-page clearfix">
+              <div id="login-box" class="login-box auth0-box before">
+                <img src="https://i.cloudup.com/StzWWrY34s.png" />
+                <h3>Auth0 Example</h3>
+                <p>Zero friction identity infrastructure, built for developers</p>
+                <a ng-click="login()" id="btn-login" class="btn btn-primary btn-lg btn-block">Log in</a>
+              </div>
+              <div id="logged-in-box" class="logged-in-box auth0-box logged-in" style="display: none;">
+                <h1 id="logo"><img src="images/auth0_logo_final_blue_RGB.png" /></h1>
+                <h2>Welcome <span id="nick" class="nickname"></span></h2>
+                <button id="btn-api">Call API</button>
+              </div>
+            </div>
+        </div>
+        <div id="myDiv"></div>
+    </body>
+</html>
