@@ -53,6 +53,42 @@ $(document).ready(function () {
                 function(response) {
                     // Insert your code here
                     console.log(response)
+                    console.log(response.data)
+                    var arr = response.data
+                    arr.forEach(function(obj){
+                      console.log(obj)
+                      var tabl = document.getElementById('tabl')
+                      var thead = document.createElement('thead')
+                      var tbody = document.createElement('tbody')
+                      var row = document.createElement('tr')
+
+                      var tr = document.createElement('tr')
+                      // Table Cell
+                      var leftRow = document.createElement('td')
+                      leftRow.innerHTML = "Name"
+                      tr.appendChild(leftRow)
+                      var rightRow = document.createElement('td')
+                      rightRow.innerHTML = "Value"
+                      tr.appendChild(rightRow)
+                      thead.appendChild(tr)
+                      tabl.appendChild(thead)
+                      // Add the table rows
+                      // use for of 
+                      // Object.keys(obj).forEach(...)
+                      // for (const [key, val] of Object.entries(obj)) { ... }
+                      for (var name in obj) {
+                          var value = obj[name];
+                          var tr = document.createElement('tr');
+                          var leftRow = document.createElement('td');
+                          leftRow.innerHTML = name;
+                          tr.appendChild(leftRow);
+                          var rightRow = document.createElement('td');
+                          rightRow.innerHTML = value;
+                          tr.appendChild(rightRow);
+                          tbody.appendChild(tr)
+                          tabl.appendChild(tbody)
+                      }
+                    })
                 }
               )
             })
