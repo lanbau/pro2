@@ -30,8 +30,10 @@ $(document).ready(function () {
       });
     });
 
-
-    document.getElementById('btn-api').addEventListener('click', function() {
+    document.getElementById('btn-api').addEventListener('click', function () {
+        document.getElementById('top').style.display = 'none';
+        document.getElementById('logged-in-box').style.display = 'none';
+        document.getElementById('wrapper').style.display = 'inline-block';
         console.log(userProfile.identities[0].access_token)
         var at = userProfile.identities[0].access_token
         FB.getLoginStatus(function (response) {
