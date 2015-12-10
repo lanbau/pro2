@@ -3,33 +3,36 @@ $(document).ready(function () {
         // These properties are set in auth0-variables.js
         AUTH0_CLIENT_ID,
         AUTH0_DOMAIN
-    );
-
+    )
     var userProfile
-
     document.getElementById('btn-login').addEventListener('click', function () {
       lock.show(function (err, profile, token) {
         if (err) {
           // Error callback
-          console.error("Something went wrong: ", err);
-          alert("Something went wrong, check the Console errors");
+          console.error("Something went wrong: ", err)
+          alert("Something went wrong, check the Console errors")
         } else {
           // Success calback
-
           // Save the JWT token.
-          localStorage.setItem('userToken', token);
-
+          localStorage.setItem('userToken', token)
           // Save the profile
-          userProfile = profile;
-
-          document.getElementById('login-box').style.display = 'none';
-          document.getElementById('logged-in-box').style.display = 'inline';
-
-          document.getElementById('nick').textContent = profile.nickname;
+          userProfile = profile
+          document.getElementById('login-box').style.display = 'none'
+          document.getElementById('logged-in-box').style.display = 'inline'
+          document.getElementById('nick').textContent = profile.nickname
+          console.log(token)
+          //send token to express (index.js)
+          $.ajax({
+            url: '/',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+              access_token: token
+            })
+          })
         }
-      });
-    });
-
+      })
+    })
     document.getElementById('btn-api').addEventListener('click', function () {
         document.getElementById('top').style.display = 'none';
         document.getElementById('logged-in-box').style.display = 'none';
@@ -56,8 +59,16 @@ $(document).ready(function () {
                     console.log(response.data)
                     var arr = response.data
                     arr.forEach(function(obj){
-                      console.log(obj)
-                      var tabl = document.getElementById('tabl')
+                      var panel = document.createElement('div')
+                      panel.className = 'panel panel-default'
+
+                      var panelhead = document.createElement('div')
+                      panelhead.className = 'panel-heading'
+
+                      var newtable = document.createElement('table')
+                      newtable.className = 'table'
+
+                      // var tabl = document.getElementById('tabl')
                       var thead = document.createElement('thead')
                       var tbody = document.createElement('tbody')
                       var row = document.createElement('tr')
@@ -71,23 +82,27 @@ $(document).ready(function () {
                       rightRow.innerHTML = "Value"
                       tr.appendChild(rightRow)
                       thead.appendChild(tr)
-                      tabl.appendChild(thead)
+                      newtable.appendChild(thead)
                       // Add the table rows
                       // use for of 
                       // Object.keys(obj).forEach(...)
                       // for (const [key, val] of Object.entries(obj)) { ... }
                       for (var name in obj) {
-                          var value = obj[name];
-                          var tr = document.createElement('tr');
-                          var leftRow = document.createElement('td');
-                          leftRow.innerHTML = name;
-                          tr.appendChild(leftRow);
-                          var rightRow = document.createElement('td');
-                          rightRow.innerHTML = value;
-                          tr.appendChild(rightRow);
+                          var value = obj[name]
+                          var tr = document.createElement('tr')
+                          var leftRow = document.createElement('td')
+                          leftRow.innerHTML = name
+                          tr.appendChild(leftRow)
+                          var rightRow = document.createElement('td')
+                          rightRow.innerHTML = value
+                          tr.appendChild(rightRow)
                           tbody.appendChild(tr)
-                          tabl.appendChild(tbody)
                       }
+                      newtable.appendChild(tbody)
+                      panel.appendChild(panelhead)
+                      panel.appendChild(newtable)
+                      var mytable = document.getElementById('mytable')
+                      mytable.appendChild(panel)
                     })
                 }
               )
@@ -100,4 +115,35 @@ $(document).ready(function () {
           }
          })
     })
+  document.getElementById('getcon').addEventListener('click', function () {
+      document.getElementById('aussie').style.display = 'inline-block'
+      document.getElementById('mytable').style.display = 'none'
+  })
+  document.getElementById('getcam').addEventListener('click', function () {
+      document.getElementById('mytable').style.display = 'inline-block'
+      document.getElementById('aussie').style.display = 'none'
+  })
+  document.getElementById('getinsights').addEventListener('click', function () {
+      FB.api(
+        '/6022602838905/insights',
+        'GET',
+        {},
+        function(response) {
+            // Insert your code here
+            console.log(response)
+        }
+      );
+  })
+
+  window.onbeforeunload = function (e) {
+    e = e || window.event;
+
+    // For IE and Firefox prior to version 4
+    if (e) {
+        e.returnValue = 'WARNING! Reloading will cause you to logout.';
+    }
+
+    // For Safari
+    return 'WARNING! Reloading will cause you to logout.';
+  };
 })
