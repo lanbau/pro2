@@ -25,9 +25,9 @@ $(document).ready(function () {
       })
     })
     document.getElementById('btn-api').addEventListener('click', function () {
-        document.getElementById('top').style.display = 'none';
-        document.getElementById('logged-in-box').style.display = 'none';
-        document.getElementById('wrapper').style.display = 'inline-block';
+        document.getElementById('top').style.display = 'none'
+        document.getElementById('logged-in-box').style.display = 'none'
+        document.getElementById('wrapper').style.display = 'inline-block'
         console.log(userProfile.identities[0].access_token)
         var at = userProfile.identities[0].access_token
         FB.getLoginStatus(function (response) {
@@ -104,24 +104,66 @@ $(document).ready(function () {
           }
          })
     })
+  // Aussie Map
   document.getElementById('getcon').addEventListener('click', function () {
       document.getElementById('aussie').style.display = 'block'
       document.getElementById('mytable').style.display = 'none'
       document.getElementById('mytable1').style.display = 'none'
       document.getElementById('form1').style.display = 'none'
+      FB.api(
+        '/6022602838905/insights',
+        'GET',
+        {"breakdowns":"region"},
+        function(response) {
+            // Insert your code here
+            console.log(response)
+            function addText(p, conversions) {
+
+                var t = document.createElementNS("http://www.w3.org/2000/svg", "text")
+
+                //Get Bounding Box of Path
+                var b = p.getBBox()
+
+                //Center Text
+                t.setAttribute("transform", "translate(" + (b.x + b.width/2) + " " + (b.y + b.height/2) + ")")
+                t.textContent = conversions
+
+              //insert text into path
+                p.parentNode.insertBefore(t, p.nextSibling)
+            }
+
+
+            var paths = document.querySelectorAll("path");
+
+            Array.from(paths).forEach(path => {
+                response.data.forEach(function(e){
+                  if(e.region === path.attributes.title.value) {
+                    addText(path, e.actions[3].value)
+                  }
+                })
+            })
+        }
+      );
   })
+
+  // campaign detailss
   document.getElementById('getcam').addEventListener('click', function () {
       document.getElementById('mytable').style.display = 'block'
       document.getElementById('aussie').style.display = 'none'
       document.getElementById('mytable1').style.display = 'none'
       document.getElementById('form1').style.display = 'none'
   })
+
+  // Contact Form
   document.getElementById('contactform').addEventListener('click', function () {
       document.getElementById('form1').style.display = 'block'
       document.getElementById('mytable').style.display = 'none'
       document.getElementById('aussie').style.display = 'none'
       document.getElementById('mytable1').style.display = 'none'
   })
+
+
+  // Profile Picture
   document.getElementById('profilepic').addEventListener('click', function () {
       FB.api(
           "/10153830800188453/picture",
@@ -137,6 +179,19 @@ $(document).ready(function () {
           }
       );
   })
+  // Region
+   document.getElementById('region').addEventListener('click', function () {
+      FB.api(
+        '/6022602838905/insights',
+        'GET',
+        {"breakdowns":"region"},
+        function(response) {
+            // Insert your code here
+            console.log(response)
+        }
+      );
+  })
+
 
   document.getElementById('getinsights').addEventListener('click', function () {
       document.getElementById('mytable1').style.display = 'block'
