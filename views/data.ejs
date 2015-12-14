@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="images/favicon.ico">
+
+    <title>Narrow Jumbotron Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="stylesheets/narrow-jumbotron.css" rel="stylesheet">
+    <script src="//d3js.org/d3.v3.min.js"></script>
+    <style>
+      .arc text {
+        font: 10px sans-serif;
+        text-anchor: middle;
+        fill: black;
+      }
+
+      .arc path {
+        stroke: #fff;
+      }
+      .bar {
+        fill: steelblue;
+      }
+
+      .bar:hover {
+        fill: brown;
+      }
+
+      .axis {
+        font: 10px sans-serif;
+      }
+
+      .axis path,
+      .axis line {
+        fill: none;
+        stroke: #000;
+        shape-rendering: crispEdges;
+      }
+
+      .x.axis path {
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-xs-right">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Contact</a>
+            </li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">D3FB Tool</h3>
+      </div>
+
+      <div class="jumbotron">
+        <h1 class="display-3">Visualise Ur Campaigns</h1>
+        <p class="lead">One of the best web apps at Keong Saik road.</p>
+        <p><a class="btn btn-lg btn-success" href="#" role="button">Try Now</a></p>
+      </div>
+
+      <div class="jumbotron">
+        <h3 class="display-6">Pie Chart</h3>
+        <div id="piechart"></div>
+      </div>
+
+      <div class="jumbotron">
+        <h3 class="display-6">Barchart</h3>
+        <div id="barchart"></div>
+      </div>
+
+      <div class="row marketing">
+        <div class="col-lg-6">
+          <h4>♦ Free</h4>
+          <p>Do anything you want.</p>
+
+          <h4>♠ Risk Free</h4>
+          <p>Just upload your csv la.</p>
+
+          <h4>♣ Cross Browser</h4>
+          <p>Melvin will buy you coffee if it is not.</p>
+        </div>
+
+        <div class="col-lg-6">
+          <h4>♥ Frameworks</h4>
+          <p>Sorry diehard purists. We let you guys down.</p>
+
+          <h4>♤ Open Source</h4>
+          <p>Copy our code & rojak it.</p>
+
+          <h4>♡ Hire Us?</h4>
+          <p>Developed By <a href="https://github.com/lanbau">Irvin Lin</a> And <a href="https://github.com/mel1313">Melvin</a></p>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <p>&copy; SG WDI Project 2 - Dec 2015</p>
+      </footer>
+
+    </div> <!-- /container -->
+    <script src="javascripts/piechart.js"></script>
+    <script src="javascripts/barchart.js"></script>
+  </body>
+</html>
