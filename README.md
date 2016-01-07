@@ -24,3 +24,9 @@ FB Ad Campaign Tool Using FB Graph API Calls, AJAX, DOM &amp; ExpressJS
 - Bootstrap
 - Content Delivery Networks(CDN): Cloudflare
 - 0Auth
+
+## Project Limitations
+- Due to Facebook API restrictions, only registered users are allowed to access accounts through pro2
+
+## Facebook App 
+- wdiproject2
